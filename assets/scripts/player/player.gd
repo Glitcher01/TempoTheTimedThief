@@ -16,7 +16,7 @@ const MOVESPEED = 200.0			# Normal movement speed.
 const JUMP_VELOCITY = -270.0	# Normal jump velocity.
 
 const ACCEL = 0.15
-const FRICTION = 0.3
+const FRICTION = 0.2
 # This variable changes based on certain zones. Default 1.
 # Ex. A slow zone should have this factor set to 0.5.
 var SPEEDFACTOR = 1
@@ -194,6 +194,8 @@ func _physics_process(delta: float) -> void:
 		velocity.x = DIVESPEED * direction
 		velocity.y = 300
 		animation_player.play("DiveKick")
+		$Timers/HurtCooldown.start(0.1)
+	print(velocity.x)
 	# This line prevents the attack animation from being
 	# interrupted by anything else.
 	if is_attacking:
@@ -324,8 +326,16 @@ func dive_bounce():
 # and he gets knocked back a bit.
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area is damageArea:
-		if hurtbox.disabled == false:
-			take_damage(area.damage, area.global_position, area.knock_force)
+		# Wait until the end of the frame before applying the hit.
+		# If a dive kick lands on the same enemy this frame, dive_bounce()
+		# will have started the invincibility timer by then.
+		check_hit.call_deferred(area)
+
+func check_hit(area: Area2D) -> void:
+	# Check the timer directly, since hurtbox.disabled
+	# only updates in _process() and can be a frame behind.
+	if is_instance_valid(area) and $Timers/HurtCooldown.is_stopped():
+		take_damage(area.damage, area.global_position, area.knock_force)
 	
 func take_damage(amount: int, hazard_pos: Vector2, knockback: float) -> void:
 	curr_health -= amount
