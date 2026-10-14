@@ -25,7 +25,9 @@ var is_crouching: bool = false  # Checks if the player is crouching.
 var is_attacking: bool = false	# Checks if the player is attacking.
 var is_damaged: bool = false	# Checks if the player is damaged.
 var is_sliding: bool = false    # Checks if the player is sliding.
+var is_transitioning: bool = false # Checks if the player is transitioning.
 var can_interact: bool = false	# Checks if the player can interact.
+var can_move: bool = true       # Checks if the player can move.
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -73,6 +75,10 @@ func _ready():
 	
 #================PHYSICS PROCESS================
 func _physics_process(delta: float) -> void:
+	if not can_move:
+		animation_player.play("Idle")
+		fx_move.visible = false
+		return
 	
 	# Gravity and wall slide.
 	if not is_on_floor():
@@ -248,7 +254,7 @@ func _physics_process(delta: float) -> void:
 		animation_player.play("WallSlide")
 	if animation_player.current_animation != "DiveKick":
 		$DiveKick/DiveHitbox.disabled = true
-		
+
 #================PROCESS================
 func _process(delta: float) -> void:
 	# When the invulnerability period after taking damage has finished
@@ -318,8 +324,6 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 	
 func take_damage(amount: int, hazard_pos: Vector2, knockback: float) -> void:
 	curr_health -= amount
-	
-	
 	
 	# If the attack causes Tempo's timer to reach 0, death is imminent.
 	if curr_health <= 0:

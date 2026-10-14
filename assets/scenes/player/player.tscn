@@ -1150,7 +1150,7 @@ visible = false
 position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_oet4l")
 autoplay = "default"
-frame_progress = 1.0
+frame_progress = 0.79977244
 
 [node name="FX_Slow" type="AnimatedSprite2D" parent="VisualEffects" unique_id=1350513643]
 visible = false
