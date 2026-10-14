@@ -5,6 +5,9 @@ extends Area2D
 var player: Node2D
 var is_transitioning: bool = false
 
+# This variable can be changed to indicate if this door goes one-way.
+@export var one_way: bool
+
 func _ready() -> void:
 	$InteractArrow.visible = false
 	timer.timeout.connect(_on_timer_timeout)

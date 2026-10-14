@@ -195,7 +195,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y = 300
 		animation_player.play("DiveKick")
 		$Timers/HurtCooldown.start(0.1)
-	print(velocity.x)
+	#print(velocity.x)
 	# This line prevents the attack animation from being
 	# interrupted by anything else.
 	if is_attacking:
