@@ -9,10 +9,11 @@ extends Control
 @export var side_alpha: float = 0.55
 @export var tween_time: float = 0.5
 
-@export var offset_degrees: float = 30
+@export var offset_degrees: float = 145
+@export var steps_per_tower: int = 8
 
 @onready var sub_control_folder: Control = $Towers
-@onready var texture_rect: TextureRect = $Base
+@onready var base_mesh: Polygon2D = $Base
 
 var radius_x: float = 200.0
 var radius_y: float = 200.0
@@ -31,24 +32,24 @@ func _ready() -> void:
 	# you would simply do this for wherever this needs to go!
 	var screen_center = get_viewport_rect().size / 2.0
 	self.global_position = screen_center
-	
-	texture_rect.pivot_offset = texture_rect.size * 0.5
-	texture_rect.position = -texture_rect.pivot_offset
 
 	var tower_index: int = 0
+	
 	# get all tower nodes
 	for child in sub_control_folder.get_children():
 		if child is Control:
 			towers.append(child)
+			child.pivot_offset = child.size * 0.5
 		if child is TextureButton && tower_index < scene_paths.size():
 			# assign a scene to switch to for each tower
 			var scene_path: String = scene_paths[tower_index]
 			tower_index += 1
 			child.pressed.connect(_on_tower_pressed.bind(scene_path))
 	
-	# set radii based on base width / height (with scale!)		
-	radius_x = texture_rect.size.x * texture_rect.scale.x / 2
-	radius_y = texture_rect.size.y * texture_rect.scale.y / 2
+	# set radii based on base width / height (with scale!)	
+	var base_scale = base_mesh.transform.get_scale();
+	radius_x = (base_scale.x)
+	radius_y = (base_scale.y)
 	
 	arrange_towers_initially()
 
@@ -56,6 +57,76 @@ func _ready() -> void:
 func arrange_towers_initially() -> void:
 	if towers.size() == 0: return
 	update_tower_carousel(false)
+	set_base_polygon()
+
+# set the base polygon based on the tower locations
+func set_base_polygon() -> void:
+	var tower_locations: Array[Vector2] = []
+	
+	# go through all towers...
+	for i in towers.size():
+		var tower = towers[i] 
+		for step in range(steps_per_tower):
+			# fractional step value between the current tower (i) and the next tower (i + 1)
+			# helps create smooth ellipse
+			var fractional_i = float(i) + (float(step) / float(steps_per_tower))
+			
+			# replicate angle calculation using fractional position
+			var progress_ratio = (fractional_i - float(curr_tower)) / float(towers.size())
+			var angle = progress_ratio * TAU + (offset_degrees * PI / 180.0)
+			
+			var depth = cos(angle)
+			var x = sin(angle) * radius_x
+			var y = -depth * radius_y
+			
+			# get same depth used on towers
+			var depth_normalized = inverse_lerp(1.0, -1.0, depth)
+			var scale_value = lerp(back_scale, front_scale, depth_normalized)
+			
+			# factor in depth to get actual location for polygon point
+			var true_bottom_center = Vector2(x, y + (tower.size.y * scale_value) * 0.5)
+			tower_locations.append(true_bottom_center)
+	
+	# add polygon points to create polygon mesh
+	base_mesh.polygon = PackedVector2Array(tower_locations)
+	
+	# stretch texture along new space via UV
+	if base_mesh.texture:
+		var tex_size = base_mesh.texture.get_size()
+		var uv_points: PackedVector2Array = PackedVector2Array()
+		
+		# get total min and max points
+		var min_x = tower_locations[0].x
+		var max_x = tower_locations[0].x
+		var min_y = tower_locations[0].y
+		var max_y = tower_locations[0].y
+		
+		for pt in tower_locations:
+			min_x = minf(min_x, pt.x)
+			max_x = maxf(max_x, pt.x)
+			min_y = minf(min_y, pt.y)
+			max_y = maxf(max_y, pt.y)
+		
+		# error checking - ensure total_width and total_height != 0	
+		var total_width = max_x - min_x
+		var total_height = max_y - min_y
+		
+		if total_width == 0: total_width = 1.0
+		if total_height == 0: total_height = 1.0
+		
+		# set UV based on location percentage of poly
+		for pt in tower_locations:
+			var relative_x = (pt.x - min_x) / total_width
+			var relative_y = (pt.y - min_y) / total_height
+			uv_points.append(Vector2(relative_x * tex_size.x, relative_y * tex_size.y))
+			
+		base_mesh.uv = uv_points
+		
+	# reset transformations
+	base_mesh.position = Vector2.ZERO
+	base_mesh.rotation = 0.0
+	base_mesh.scale = Vector2.ONE
+	base_mesh.z_index = -1
 
 func _process(_delta: float) -> void:	
 	if is_rotating: return
@@ -85,11 +156,11 @@ func update_tower_carousel(animated: bool) -> void:
 		var x = sin(angle) * radius_x
 		var y = -depth * radius_y
 		
-		var depth_normalized = inverse_lerp(-1.0, 1.0, depth)
+		var depth_normalized = inverse_lerp(1.0, -1.0, depth)
 		var scale_value = lerp(back_scale, front_scale, depth_normalized)
 		var alpha_value = lerp(side_alpha, 1.0, depth_normalized)
 		
-		var target_position = size * 0.5 + Vector2(x, y) - tower.size * 0.5
+		var target_position = Vector2(x, y) - tower.pivot_offset
 		var target_scale = Vector2.ONE * scale_value
 		
 		tower.z_index = int(depth_normalized * 100.0)
