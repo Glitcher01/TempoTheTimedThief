@@ -967,7 +967,7 @@ position = Vector2(2371, -516)
 rotation = 4.712389
 
 [node name="Player" parent="." unique_id=1102362985 instance=ExtResource("2_tgljw")]
-position = Vector2(2080, -5)
+position = Vector2(400, 299)
 
 [node name="Hidden Area Cover Tiles" type="TileMapLayer" parent="." unique_id=1919002122]
 position = Vector2(1979, 212)
