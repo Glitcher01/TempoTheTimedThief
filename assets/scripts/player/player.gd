@@ -185,7 +185,12 @@ func _physics_process(delta: float) -> void:
 		animation_player.play("Attack")
 		AudioManager.play_attack()
 	#divekick code
-	if Input.is_action_just_pressed("attack") and not is_on_floor() and Input.is_action_pressed("crouch"):
+	if (
+		Input.is_action_just_pressed("attack") 
+		and direction 
+		and not is_on_floor() 
+		and Input.is_action_pressed("crouch")
+		):
 		velocity.x = DIVESPEED * direction
 		velocity.y = 300
 		animation_player.play("DiveKick")

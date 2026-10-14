@@ -1,12 +1,94 @@
 [gd_scene format=3 uid="uid://70ara05dw35v"]
 
 [ext_resource type="Script" uid="uid://b57xrpltj6sda" path="res://assets/scripts/items and interactables/door_zone.gd" id="1_urpqx"]
+[ext_resource type="Texture2D" uid="uid://4xqpjdroot1y" path="res://assets/sprites/items and interactables/Door Zone.png" id="2_t5f0m"]
+[ext_resource type="Texture2D" uid="uid://clwakqmwhbrnr" path="res://assets/sprites/items and interactables/Interact Arrow.png" id="3_3dq3a"]
 
-[node name="GiveMeACollisionBox!" type="Area2D" unique_id=323326084]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5f0m"]
+size = Vector2(32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gov6"]
+atlas = ExtResource("3_3dq3a")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3um8"]
+atlas = ExtResource("3_3dq3a")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyj5x"]
+atlas = ExtResource("3_3dq3a")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8ilk"]
+atlas = ExtResource("3_3dq3a")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynkm7"]
+atlas = ExtResource("3_3dq3a")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ol56"]
+atlas = ExtResource("3_3dq3a")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h7oqf"]
+atlas = ExtResource("3_3dq3a")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4vrd"]
+atlas = ExtResource("3_3dq3a")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u5j42"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gov6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w3um8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyj5x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8ilk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ynkm7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ol56")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h7oqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m4vrd")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="DoorZone" type="Area2D" unique_id=323326084]
 script = ExtResource("1_urpqx")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1532644863]
+texture = ExtResource("2_t5f0m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1862105333]
+shape = SubResource("RectangleShape2D_t5f0m")
+debug_color = Color(0.5921569, 0.40784314, 1, 0.41960785)
 
 [node name="Timers" type="Node" parent="." unique_id=215359986]
 
 [node name="mov" type="Timer" parent="Timers" unique_id=1189578722]
 
+[node name="InteractArrow" type="AnimatedSprite2D" parent="." unique_id=1658743594]
+position = Vector2(0, -21)
+sprite_frames = SubResource("SpriteFrames_u5j42")
+autoplay = "default"
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
