@@ -13,6 +13,8 @@ extends Area2D
 var basic_treasure = preload("res://assets/scenes/items and interactables/treasure/basic_treasure.tscn")
 
 func _on_area_entered(area: Area2D) -> void:
+	if area.name == "DiveKick":
+		area.get_parent().dive_bounce()
 	animation_player.play("Open")
 	sparkles.visible = false
 	
@@ -20,6 +22,7 @@ func _on_area_entered(area: Area2D) -> void:
 	if opened == true:
 		pass
 	else:
+		AudioManager.play_chest_open()
 		# The loot provided will differ based on the size of the chest.
 		if self.name.contains("Small"):
 			for i in range(8):

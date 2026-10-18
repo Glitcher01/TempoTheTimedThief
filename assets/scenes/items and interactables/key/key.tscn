@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cd4vyp074qyrc"]
 
 [ext_resource type="Texture2D" uid="uid://dq3jyh4hgird4" path="res://assets/sprites/items and interactables/keys/Key.png" id="1_057hh"]
+[ext_resource type="Script" uid="uid://d0xhcbiunf6ew" path="res://assets/scripts/items and interactables/key.gd" id="1_ijjcq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ijjcq"]
 atlas = ExtResource("1_057hh")
@@ -117,9 +118,11 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hl3ka"]
-radius = 2.236068
+radius = 6.0827627
 
 [node name="Key" type="CharacterBody2D" unique_id=1892316834]
+collision_layer = 0
+script = ExtResource("1_ijjcq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=356116645]
 sprite_frames = SubResource("SpriteFrames_ijjcq")
@@ -129,5 +132,6 @@ frame_progress = 0.07159442
 [node name="PickUp" type="Area2D" parent="." unique_id=1647820512]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickUp" unique_id=1154110065]
-position = Vector2(0, 6)
 shape = SubResource("CircleShape2D_hl3ka")
+
+[connection signal="body_entered" from="PickUp" to="." method="_on_pick_up_body_entered"]

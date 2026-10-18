@@ -2,10 +2,14 @@
 
 [ext_resource type="Script" uid="uid://dyq354h6ytwio" path="res://assets/scripts/enemies/sand shifter/sand_shifter.gd" id="1_7du8f"]
 [ext_resource type="Texture2D" uid="uid://dgaexjqam22k" path="res://assets/sprites/enemies/Sand Shifter/Sand Shifter.png" id="1_ua6vj"]
+[ext_resource type="Shader" uid="uid://buywtbw2ajaof" path="res://assets/miscellaneous/shaders/hitflash.tres" id="2_7du8f"]
 [ext_resource type="PackedScene" uid="uid://bqx63s0ie5bp7" path="res://assets/scenes/enemies/damage_area.tscn" id="2_u5gsn"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7du8f"]
-size = Vector2(20, 25)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_58xqb"]
+resource_local_to_scene = true
+shader = ExtResource("2_7du8f")
+shader_parameter/Enabled = false
+shader_parameter/Tint = Color(1, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u5gsn"]
 size = Vector2(22, 27)
@@ -134,9 +138,33 @@ _data = {
 [sub_resource type="Animation" id="Animation_tapp8"]
 resource_name = "Hit Flash"
 length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/Enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_nr0we"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/Enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0tyev"]
 _data = {
@@ -148,12 +176,9 @@ _data = {
 script = ExtResource("1_7du8f")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1855195553]
+material = SubResource("ShaderMaterial_58xqb")
 texture = ExtResource("1_ua6vj")
 hframes = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1689508226]
-position = Vector2(0, -0.5)
-shape = SubResource("RectangleShape2D_7du8f")
 
 [node name="DamageArea" parent="." unique_id=633864572 instance=ExtResource("2_u5gsn")]
 collision_mask = 4

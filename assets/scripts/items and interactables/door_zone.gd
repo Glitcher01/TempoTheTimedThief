@@ -3,20 +3,18 @@ extends Area2D
 @onready var timer: Timer = $Timers/mov
 
 var player: Node2D
+# Check if the player is currently within interaction range.
+var interacting: bool = false
 var is_transitioning: bool = false
-
-# This variable can be changed to indicate if this door goes one-way.
-@export var one_way: bool
 
 func _ready() -> void:
 	$InteractArrow.visible = false
 	timer.timeout.connect(_on_timer_timeout)
 
 func _process(_delta: float) -> void:
-	if is_transitioning:
+	if is_transitioning and Input.is_action_pressed("interact"):
 		return
-
-	if Input.is_action_just_pressed("interact"):
+	if interacting and Input.is_action_pressed("interact"):
 		$InteractArrow.visible = false
 		for body in get_overlapping_bodies():
 			if body.name == "Player":
@@ -29,6 +27,7 @@ func start_transition(body: Node2D) -> void:
 	player.can_move = false
 	player.is_transitioning = true
 	
+	AudioManager.play_enter()
 	TransitionScene.transition()
 	await TransitionScene.on_transition_finished
 	
@@ -43,7 +42,9 @@ func _on_timer_timeout() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
 		$InteractArrow.visible = true
+		interacting = true
 		
 func _on_body_exited(body: Node2D) -> void:
 	if body.name == "Player":
 		$InteractArrow.visible = false
+		interacting = false

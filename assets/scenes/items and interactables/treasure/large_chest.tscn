@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dq1jbsqy1g0lb" path="res://assets/sprites/items and interactables/treasure/Treasure Sparkles.png" id="2_i1y85"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c3pvd"]
-size = Vector2(26, 24)
+size = Vector2(26, 13)
 
 [sub_resource type="Animation" id="Animation_04gkd"]
 resource_name = "Idle"
@@ -204,6 +204,7 @@ texture = ExtResource("1_04gkd")
 hframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1462575778]
+position = Vector2(0, 5.5)
 shape = SubResource("RectangleShape2D_c3pvd")
 debug_color = Color(1, 1, 0, 0.41960785)
 

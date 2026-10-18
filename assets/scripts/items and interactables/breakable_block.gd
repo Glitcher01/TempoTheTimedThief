@@ -11,6 +11,7 @@ func _on_check_for_attack_hitbox_area_entered(area: Area2D) -> void:
 	if area.name == "Attack" or area.name == "DiveKick":
 		if area.name == "DiveKick":
 			area.get_parent().dive_bounce()
+		AudioManager.play_break_block()
 		animation_player.play("Broken")
 		await animation_player.animation_finished
 		queue_free()

@@ -13,11 +13,6 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var spawning: bool
 @export var static_rarity: int 
 
-# HUD
-@onready var hud: Control = $"../../../CanvasLayer/HUD"
-
-
-
 # This function is called by open_treasure, which is attached to
 # treasure chests. It changes the rarity of the treasure and changes
 # the appearance of the treasure accordingly.
@@ -75,22 +70,19 @@ func _physics_process(delta: float) -> void:
 # in-level treasure count accordingly, then remove the treasure.
 func _on_pick_up_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
-		if $AnimatedSprite2D.frame == 0:
-			hud.temp_treasure += 1
-			print("+1 treasure")
-		elif $AnimatedSprite2D.frame == 1:
-			hud.temp_treasure += 5
-			print("+5 treasure")
-		elif $AnimatedSprite2D.frame == 2:
-			hud.temp_treasure += 10
-			print("+10 treasure")
-		elif $AnimatedSprite2D.frame == 3:
-			hud.temp_treasure += 20
-			print("+20 treasure")
-		elif $AnimatedSprite2D.frame == 4:
-			hud.temp_treasure += 50
-			print("+50 treasure")
-		elif $AnimatedSprite2D.frame == 5:
-			hud.temp_treasure += 100
-			print("+100 treasure")
+		AudioManager.play_treasure_pickup()
+		
+		match $AnimatedSprite2D.frame:
+			0:
+				GameManager.temp_treasure += 1
+			1:
+				GameManager.temp_treasure += 5
+			2:
+				GameManager.temp_treasure += 10
+			3:
+				GameManager.temp_treasure += 20
+			4:
+				GameManager.temp_treasure += 50
+			5:
+				GameManager.temp_treasure += 100
 		queue_free()

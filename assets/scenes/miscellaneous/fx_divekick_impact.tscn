@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://cpx5oxkiilt5y"]
+
+[ext_resource type="Texture2D" uid="uid://b6u8h8f6320n7" path="res://assets/sprites/player/VFX Sheets/Divekick Impact.png" id="1_xlnbg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ctpn8"]
+atlas = ExtResource("1_xlnbg")
+region = Rect2(0, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_worgk"]
+atlas = ExtResource("1_xlnbg")
+region = Rect2(80, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1hq5n"]
+atlas = ExtResource("1_xlnbg")
+region = Rect2(160, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s7vvf"]
+atlas = ExtResource("1_xlnbg")
+region = Rect2(240, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4x7yu"]
+atlas = ExtResource("1_xlnbg")
+region = Rect2(320, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcebl"]
+atlas = ExtResource("1_xlnbg")
+region = Rect2(400, 0, 80, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g3x4t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ctpn8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_worgk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1hq5n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s7vvf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4x7yu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mcebl")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": 0,
+"name": &"default",
+"speed": 30.0
+}]
+
+[node name="DivekickImpact" type="AnimatedSprite2D" unique_id=1387724104]
+sprite_frames = SubResource("SpriteFrames_g3x4t")

@@ -70,5 +70,5 @@ frame = 5
 position = Vector2(0, 6)
 shape = SubResource("CircleShape2D_hfphn")
 
-[connection signal="body_entered" from="PickUp" to="." method="_on_collisions_body_entered"]
 [connection signal="body_entered" from="PickUp" to="." method="_on_pick_up_body_entered"]
+[connection signal="body_entered" from="PickUp" to="." method="_on_collisions_body_entered"]

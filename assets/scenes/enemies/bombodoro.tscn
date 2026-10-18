@@ -1,0 +1,251 @@
+[gd_scene format=3 uid="uid://calfhx4sco608"]
+
+[ext_resource type="Script" uid="uid://dpbws14dl0wth" path="res://assets/scripts/enemies/bombodoro.gd" id="1_075h0"]
+[ext_resource type="Shader" uid="uid://buywtbw2ajaof" path="res://assets/miscellaneous/shaders/hitflash.tres" id="1_83u2u"]
+[ext_resource type="Texture2D" uid="uid://cgvqimq07538p" path="res://assets/sprites/enemies/Bombodoro/Bombodoro.png" id="1_svf4d"]
+[ext_resource type="PackedScene" uid="uid://bqx63s0ie5bp7" path="res://assets/scenes/enemies/damage_area.tscn" id="2_83u2u"]
+[ext_resource type="Texture2D" uid="uid://b7uykdytsq5f5" path="res://assets/sprites/enemies/Bombodoro/Bombodoro Explosion.png" id="4_nskue"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_075h0"]
+resource_local_to_scene = true
+shader = ExtResource("1_83u2u")
+shader_parameter/Enabled = false
+shader_parameter/Tint = Color(1, 1, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bd1rj"]
+size = Vector2(23, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hfphn"]
+size = Vector2(90, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nr0we"]
+size = Vector2(31, 22)
+
+[sub_resource type="Animation" id="Animation_075h0"]
+resource_name = "Explode"
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.25, 0.3, 0.35000002, 0.40000004, 0.65, 0.7000001, 0.75, 0.8, 0.84999996, 0.8833334, 0.9, 0.95),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.75, 0.8, 0.825, 0.85, 0.875, 0.90000004, 0.925, 0.95, 0.975),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DamageArea/CollisionShape2D:shape:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.75, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(31, 22), Vector2(70, 50)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DamageArea/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_svf4d"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DamageArea/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_83u2u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DamageArea/CollisionShape2D:shape:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(31, 22)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DamageArea/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_075h0"]
+_data = {
+&"Explode": SubResource("Animation_075h0"),
+&"Idle": SubResource("Animation_svf4d"),
+&"RESET": SubResource("Animation_83u2u")
+}
+
+[sub_resource type="Animation" id="Animation_nskue"]
+resource_name = "Hit Flash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/Enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_bd1rj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/Enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bd1rj"]
+_data = {
+&"Hit Flash": SubResource("Animation_nskue"),
+&"RESET": SubResource("Animation_bd1rj")
+}
+
+[node name="Bombodoro" type="CharacterBody2D" unique_id=1842378879]
+script = ExtResource("1_075h0")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1812107611]
+material = SubResource("ShaderMaterial_075h0")
+texture = ExtResource("1_svf4d")
+hframes = 4
+vframes = 4
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1477315449]
+texture = ExtResource("4_nskue")
+hframes = 9
+frame = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1666359122]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_bd1rj")
+
+[node name="Detection Area" type="Area2D" parent="." unique_id=623304557]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection Area" unique_id=352347431]
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_hfphn")
+debug_color = Color(0.9702255, 0, 0.45931357, 0.41960785)
+
+[node name="DamageArea" parent="." unique_id=633864572 instance=ExtResource("2_83u2u")]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=1515404168]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_nr0we")
+debug_color = Color(0.9882353, 0, 0.29411766, 0.41960785)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1478683477]
+libraries/ = SubResource("AnimationLibrary_075h0")
+
+[node name="HitflashPlayer" type="AnimationPlayer" parent="." unique_id=1561484303]
+libraries/ = SubResource("AnimationLibrary_bd1rj")
+
+[connection signal="frame_changed" from="Sprite2D" to="." method="_on_sprite_2d_frame_changed"]
+[connection signal="area_entered" from="Detection Area" to="." method="_on_detection_area_area_entered"]
+[connection signal="body_entered" from="Detection Area" to="." method="_on_detection_area_body_entered"]
+[connection signal="area_entered" from="DamageArea" to="." method="_on_damage_area_area_entered"]

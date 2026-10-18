@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dbhxrxyrl85vl" path="res://assets/scripts/ui/level_timer.gd" id="1_iamgx"]
 [ext_resource type="Texture2D" uid="uid://mu6chrovluai" path="res://assets/sprites/ui/Chronic_Heart_Heart.png" id="2_6m43u"]
+[ext_resource type="FontFile" uid="uid://myucyoksi71d" path="res://assets/miscellaneous/fonts/static/PixelifySans-Regular.ttf" id="3_83531"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_35to3"]
 font_size = 11
@@ -23,6 +24,7 @@ offset_left = -20.0
 offset_top = -12.0
 offset_right = 20.0
 offset_bottom = 11.0
+theme_override_fonts/font = ExtResource("3_83531")
 text = "X:XX"
 label_settings = SubResource("LabelSettings_35to3")
 horizontal_alignment = 1

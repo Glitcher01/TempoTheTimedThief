@@ -13,13 +13,14 @@ config_version=5
 config/name="Tempo the Timed Thief"
 run/main_scene="uid://cs6yt84erlmwj"
 config/features=PackedStringArray("4.7", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://bjufvyg33nai3"
 
 [autoload]
 
 AudioManager="*uid://mq8b6oh2egqf"
 Hitstop="*uid://cvgi7v2mrp2fw"
 TransitionScene="*uid://b8lrblnl6vkk1"
+GameManager="*uid://ccxrm81jkpvgu"
 
 [display]
 
