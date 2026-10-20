@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://cs6yt84erlmwj"]
 
 [ext_resource type="PackedScene" uid="uid://cs1lk5kwrp06i" path="res://assets/scenes/ui/leveltimer.tscn" id="1_nu17j"]
+[ext_resource type="Script" uid="uid://cpj0ms1j1u6eh" path="res://assets/scripts/other/screenie.gd" id="1_q123d"]
 [ext_resource type="PackedScene" uid="uid://bcoj2t6rvvmf2" path="res://assets/scenes/ui/hud.tscn" id="1_t8rwm"]
 [ext_resource type="Texture2D" uid="uid://cwk1pyg1q2jj0" path="res://assets/sprites/tilesets/Tileset (Clock Tower).png" id="1_tgljw"]
 [ext_resource type="Texture2D" uid="uid://bqlc78ifltdma" path="res://assets/sprites/tilesets/parallax/Clock Tower/nightsky0.png" id="1_txix4"]
@@ -565,12 +566,14 @@ sources/0 = SubResource("TileSetAtlasSource_25i60")
 size = Vector2(128, 128)
 
 [node name="TutorialTheClockTower" type="Node2D" unique_id=960022459]
+script = ExtResource("1_q123d")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1188578362]
 
 [node name="HUD" parent="CanvasLayer" unique_id=1669747353 instance=ExtResource("1_t8rwm")]
 
 [node name="Level Timer" parent="CanvasLayer" unique_id=929770682 instance=ExtResource("1_nu17j")]
+visible = false
 position = Vector2(65, 50)
 scale = Vector2(3, 3)
 totalleveltime = 360.0

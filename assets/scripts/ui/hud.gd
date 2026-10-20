@@ -1,9 +1,9 @@
 extends Control
 
 
-@onready var treasure_label: Label = $VBoxContainer/Treasure/TreasureLabel
-@onready var keys_label: Label = $VBoxContainer/Keys/KeysLabel
-@onready var artifacts_label: Label = $VBoxContainer/Artifacts/ArtifactsLabel
+@onready var treasure_label: Label = $Treasure/TreasureLabel
+@onready var keys_label: Label = $Keys/KeysLabel
+@onready var artifacts_label: Label = $Artifacts/ArtifactsLabel
 
 func _process(delta: float) -> void:
 	treasure_label.text = str(GameManager.temp_treasure)

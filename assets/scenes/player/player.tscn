@@ -1188,12 +1188,14 @@ debug_color = Color(0.99673706, 0, 0.1898483, 0.41960785)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1351649107]
 position = Vector2(0, -44)
-zoom = Vector2(3, 3)
 process_callback = 0
 limit_smoothed = true
-position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("4_oet4l")
+lookahead_distance = 20.0
+lookahead_speed = 5.0
+min_speed = 1.0
+turn_delay = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1517579445]
 libraries/ = SubResource("AnimationLibrary_14505")
